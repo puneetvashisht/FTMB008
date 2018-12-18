@@ -24,8 +24,18 @@ app.post('/courses', (req, res)=>{
 
 app.delete('/courses/:index', (req, res)=>{
     console.log(req.params.index);
-    courses.splice(req.params.index, 1);
-    res.status(202).json(courses);
+    var index = req.params.index
+    if(index<courses.length){
+        courses.splice(index, 1);
+        res.status(202).json(courses);
+    }
+    else{
+        res.status(204).json({message: "Course object not found"})
+    }
+   
+
+
+    
 })
  
 app.listen(3000)
