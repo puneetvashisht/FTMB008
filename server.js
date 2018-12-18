@@ -2,6 +2,9 @@ const http = require('http')
 const fs = require('fs')
 const log = require('log')
 
+var config = fs.readFileSync('./config.json')
+var configObj = JSON.parse(config)
+
 var server = http.createServer((req, res)=> {
     console.log(req.url)  
     log.debug("Request Url is:  %s", req.url);
@@ -22,4 +25,4 @@ var server = http.createServer((req, res)=> {
     }
 })
 
-server.listen(3001, ()=> console.log("listening on port 3001"))
+server.listen(configObj.port, ()=> console.log("listening on port " + configObj.port))
