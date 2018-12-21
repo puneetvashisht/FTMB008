@@ -1,12 +1,14 @@
 var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
+var cors = require('cors')
 var categoryRepo = require('./repos/category-repo')
 
 
 // parse application/json
 app.use(bodyParser.json())
 
+app.use(cors())
 
 app.get('/categories', (req, res)=> {
     categoryRepo.findCategories((err, categories)=>{
@@ -25,18 +27,17 @@ app.post('/categories', (req, res)=>{
 
 app.delete('/categories/:id', (req, res)=>{
     console.log(req.params.id);
-    var index = req.params.id
-    if(index<courses.length){
-        courses.splice(index, 1);
-        res.status(202).json(courses);
-    }
-    else{
-        res.status(204).json({message: "Course object not found"})
-    }
-   
+    var id = req.params.id
 
-
-    
+    categoryRepo.deleteCategory(id, (err, data)=>{
+        if(err) {
+            res.status(204).json(data);
+        }
+        else{
+            res.status(202).json(data);
+        }
+       
+    }) 
 })
  
 app.listen(3000, ()=>console.log('listening on 3000'))
