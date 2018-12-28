@@ -7,4 +7,15 @@ const CategorySchema = new Schema({
   });
 const Category = mongoose.model('Category', CategorySchema);
 
-module.exports = {Category}
+
+
+const WorkoutSchema = new Schema({
+  title: { type: String, default: 'Default' },
+  notes: { type: String, default: 'Default notes' },
+  cbpm: { type: Number},
+  category: { type: Schema.Types.ObjectId, ref: 'Category' }
+});
+const Workout = mongoose.model('Workout', WorkoutSchema);
+
+
+module.exports = {Category, Workout}

@@ -5,28 +5,22 @@ const models = require('../models/category')
 mongoose.connect('mongodb://localhost/workout');
 
 
-function insertCategory(category){
-    const categoryObj = new models.Category(category);
-    categoryObj.save()
+function insertWorkout(workout){
+    const workoutObj = new models.Workout(workout);
+    workoutObj.save()
     .then(() =>{
+        models.Category.save();
         console.log('Insert course successful!!');
     });
 }
 
-// function findCategory(id,callback){
-//     categoryModel.Category.find({_id, id}, (err, res)=>{
-//         if(err) callback(err, false);
-//         // console.log(res);
-//         callback(null, true);
-//     })    
-// }
-
-function findCategories(callback){
-    models.Category.find({}, (err, res)=>{
+function findWorkouts(callback){
+    models.Workout.find({}, (err, res)=>{
         if(err) callback(err, null);
         // console.log(res);
         callback(null, res);
-    })    
+    })
+
 }
 
 
@@ -44,7 +38,7 @@ function deleteCategory(id, callback){
     });
 }
 
-module.exports =  {insertCategory,findCategories, deleteCategory}
+module.exports =  {insertWorkout, findWorkouts}
 
 
     

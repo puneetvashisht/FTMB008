@@ -3,6 +3,7 @@ var app = express()
 var bodyParser = require('body-parser')
 var cors = require('cors')
 var categoryRepo = require('./repos/category-repo')
+var workoutRepo = require('./repos/workout-repo')
 
 
 // parse application/json
@@ -38,6 +39,22 @@ app.delete('/categories/:id', (req, res)=>{
         }
        
     }) 
+})
+
+
+app.post('/workout', (req, res)=>{
+    var workout = req.body;
+    console.log(workout);
+    workoutRepo.insertWorkout(workout) 
+    res.status(201).json({message: "Workout successfully inserted"});
+})
+
+app.get('/workout', (req, res)=> {
+    workoutRepo.findWorkouts((err, workouts)=>{
+        if(err) throw err;
+        res.json(workouts)
+    })
+    
 })
  
 app.listen(3000, ()=>console.log('listening on 3000'))
