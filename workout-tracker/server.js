@@ -49,6 +49,15 @@ app.post('/workout', (req, res)=>{
     res.status(201).json({message: "Workout successfully inserted"});
 })
 
+
+
+app.post('/workout/start', (req, res)=>{
+    var workoutActive = req.body;
+    console.log(workoutActive);
+    workoutRepo.startWorkout(workoutActive) 
+    res.status(201).json({message: "Workout successfully started"});
+})
+
 app.get('/workout', (req, res)=> {
     workoutRepo.findWorkouts((err, workouts)=>{
         if(err) throw err;

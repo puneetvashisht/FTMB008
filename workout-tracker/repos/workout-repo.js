@@ -24,6 +24,15 @@ function findWorkouts(callback){
 }
 
 
+function startWorkout(workoutActive){
+    const workoutObj = new models.WorkoutActive(workoutActive);
+    workoutObj.save()
+    .then(() =>{
+        console.log('Insert workout active successful!!');
+    });
+}
+
+
 function deleteCategory(id, callback){
 
     models.Category.findOneAndRemove({ _id: id }) 
@@ -38,7 +47,7 @@ function deleteCategory(id, callback){
     });
 }
 
-module.exports =  {insertWorkout, findWorkouts}
+module.exports =  {insertWorkout, findWorkouts, startWorkout}
 
 
     

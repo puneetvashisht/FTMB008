@@ -18,4 +18,15 @@ const WorkoutSchema = new Schema({
 const Workout = mongoose.model('Workout', WorkoutSchema);
 
 
-module.exports = {Category, Workout}
+
+const WorkoutActiveSchema = new Schema({
+  startDate: { type: Date, default: new Date()},
+  startTime: { type: Date, default: new Date() },
+  endDate: { type: Date, default: new Date()},
+  endTime: { type: Date, default: new Date() },
+  status: { type: Boolean, default: true},
+  workoutId: { type: Schema.Types.ObjectId, ref: 'Workout' }
+});
+const WorkoutActive = mongoose.model('WorkoutActive', WorkoutActiveSchema);
+
+module.exports = {Category, Workout, WorkoutActive}
