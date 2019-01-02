@@ -25,11 +25,24 @@ function findWorkouts(callback){
 
 
 function startWorkout(workoutActive){
+    workoutActive.startDate = new Date();
+    workoutActive.startTime = new Date();
     const workoutObj = new models.WorkoutActive(workoutActive);
     workoutObj.save()
     .then(() =>{
         console.log('Insert workout active successful!!');
     });
+}
+
+function endWorkout(workoutActive){
+    workoutActive.endDate = new Date();
+    workoutActive.endTime = new Date();
+    workoutActive.status = false;
+
+    models.WorkoutActive.findOneAndUpdate({workoutId: workoutActive.workoutId}, workoutActive, (err, docs)=>{
+        if(err) throw err;
+        console.log('End workout active successful!!');
+    })
 }
 
 
@@ -47,7 +60,7 @@ function deleteCategory(id, callback){
     });
 }
 
-module.exports =  {insertWorkout, findWorkouts, startWorkout}
+module.exports =  {insertWorkout, findWorkouts, startWorkout, endWorkout}
 
 
     

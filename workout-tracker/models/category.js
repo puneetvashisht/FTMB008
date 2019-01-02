@@ -20,10 +20,10 @@ const Workout = mongoose.model('Workout', WorkoutSchema);
 
 
 const WorkoutActiveSchema = new Schema({
-  startDate: { type: Date, default: new Date()},
-  startTime: { type: Date, default: new Date() },
-  endDate: { type: Date, default: new Date()},
-  endTime: { type: Date, default: new Date() },
+  startDate: { type: Date},
+  startTime: { type: Date},
+  endDate: { type: Date},
+  endTime: { type: Date},
   status: { type: Boolean, default: true},
   workoutId: { type: Schema.Types.ObjectId, ref: 'Workout' }
 });

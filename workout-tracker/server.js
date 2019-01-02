@@ -57,6 +57,12 @@ app.post('/workout/start', (req, res)=>{
     workoutRepo.startWorkout(workoutActive) 
     res.status(201).json({message: "Workout successfully started"});
 })
+app.post('/workout/end', (req, res)=>{
+    var workoutActive = req.body;
+    console.log(workoutActive);
+    workoutRepo.endWorkout(workoutActive) 
+    res.status(201).json({message: "Workout successfully ended"});
+})
 
 app.get('/workout', (req, res)=> {
     workoutRepo.findWorkouts((err, workouts)=>{
