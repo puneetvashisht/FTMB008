@@ -5,6 +5,9 @@ var bodyParser = require('body-parser')
 
 // parse application/json
 app.use(bodyParser.json())
+
+app.set('view engine', 'ejs')
+app.set('views', './views')
  
 var courses = [
     {title: "Angular 6", summary: "Framework from google!!"},
@@ -13,6 +16,15 @@ var courses = [
 
 app.get('/courses', (req, res)=> {
     res.json(courses)
+})
+
+
+app.get('/', (req, res)=> {
+    res.render('index', {message: 'Test Message EJS', title: 'Test Title EJS'})
+})
+
+app.get('/courseshtml', (req, res)=> {
+    res.render('courses', {courses})
 })
 
 app.post('/courses', (req, res)=>{

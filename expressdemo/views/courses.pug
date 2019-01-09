@@ -1,0 +1,12 @@
+html
+    body
+        table
+            thead
+            tr 
+                th Title
+                th Summary
+            tbody
+            each course, index in courses
+                tr
+                    td=course.title
+                    td=course.summary
